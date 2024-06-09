@@ -1,2 +1,0 @@
-# RockPaperScissors
-RockPaperScissors For TheOdinProject
