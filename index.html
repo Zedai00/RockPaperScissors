@@ -5,22 +5,52 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Rock Paper Scissors</title>
     <script src="script.js"></script>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Spicy+Rice&display=swap"
+      rel="stylesheet"
+    />
+    <script
+      src="https://kit.fontawesome.com/fe38891bbf.js"
+      crossorigin="anonymous"
+    ></script>
   </head>
   <body>
-    <header>
-      <title>Rock Paper Scissor</title>
-    </header>
-    <main>
-      <section class="moves">
-        <div id="rock"></div>
-        <div id="paper"></div>
-        <div id="scissor"></div>
-      </section>
-      <section class="output"></section>
-      <section class="controls">
-        <div id="new-game"></div>
-      </section>
-    </main>
-    <footer></footer>
+    <div class="container">
+      <header>
+        <h1 class="spicy-rice-regular">Rock Paper Scissor</h1>
+      </header>
+      <main>
+        <section class="moves">
+          <div id="rock" class="box">
+            <i class="fa-solid fa-hand-back-fist"></i>
+            <span>Rock</span>
+          </div>
+          <div id="paper" class="box">
+            <i class="fa-solid fa-hand"></i>
+            <span>Paper</span>
+          </div>
+          <div id="scissor" class="box">
+            <span class="fa-rotate-90" style="display: inline-block">
+              <i class="fa-solid fa-hand-scissors fa-flip-vertical"></i>
+            </span>
+            <span>Scissor</span>
+          </div>
+        </section>
+        <section class="output">
+          <div id="score">
+            <div id="player-score"></div>
+            <div id="comp-score"></div>
+          </div>
+          <div id="logs"></div>
+        </section>
+        <section class="controls">
+          <div id="new-game">New Game</div>
+        </section>
+      </main>
+      <footer>Zed</footer>
+    </div>
   </body>
 </html>

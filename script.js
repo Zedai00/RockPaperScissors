@@ -55,4 +55,4 @@ function playGame(times) {
   }
 }
 
-playGame(5)
+// playGame(5)
