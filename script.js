@@ -4,6 +4,12 @@ function log(text) {
   document.querySelector("#logs").append(p)
 }
 
+function clearLogs() {
+  document.querySelector("#player-score").textContent = `Player Score: 0`
+  document.querySelector("#comp-score").textContent = `Computer Score: 0`
+  document.querySelector("#logs").textContent = ''
+}
+
 function logPlayerScore(score) {
   document.querySelector("#player-score").textContent = `Player Score: ${score}`
 }
@@ -29,7 +35,7 @@ let computerScore = 0
 let turn = 0
 function playRound(playerChoice, computerChoice) {
   if (turn <= 0) {
-    document.querySelector("#logs").textContent = ''
+    clearLogs()
   }
   turn++
 
@@ -71,7 +77,6 @@ function printWinner() {
 let moves = Array.from(document.querySelector(".moves").children)
 moves.forEach((move) => {
   move.addEventListener("click", (e) => {
-    console.log(e.currentTarget.id)
     if (turn >= 5) {
       printWinner()
     } else {
