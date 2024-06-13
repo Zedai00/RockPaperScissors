@@ -1,3 +1,17 @@
+function log(text) {
+  let p = document.createElement('p')
+  p.textContent = text
+  document.querySelector("#logs").append(p)
+}
+
+function logPlayerScore(score) {
+  document.querySelector("#player-score").textContent = `Player Score: ${score}`
+}
+
+function logComputerScore(score) {
+  document.querySelector("#comp-score").textContent = `Computer Score: ${score}`
+}
+
 function getComputerChoice() {
   let chance = Math.random() * 100
   if (chance > 66) {
@@ -9,50 +23,73 @@ function getComputerChoice() {
   }
 }
 
-function getHumanChoice() {
-  let choice = prompt("Enter Choice: ").toLowerCase()
-  let moves = ['rock', 'paper', 'scissor']
-  if (moves.includes(choice)) {
-    return choice
-  }
-}
 
-let humanScore = 0
+let playerScore = 0
 let computerScore = 0
-function playRound(humanChoice, computerChoice) {
+let turn = 0
+function playRound(playerChoice, computerChoice) {
+  if (turn <= 0) {
+    document.querySelector("#logs").textContent = ''
+  }
+  turn++
+
   if (
-    (humanChoice == 'rock' && computerChoice == 'scissor') ||
-    (humanChoice == 'paper' && computerChoice == 'rock') ||
-    (humanChoice == 'scissor' && computerChoice == 'paper')
+    (playerChoice == 'rock' && computerChoice == 'scissor') ||
+    (playerChoice == 'paper' && computerChoice == 'rock') ||
+    (playerChoice == 'scissor' && computerChoice == 'paper')
   ) {
-    console.log(`You Win! ${humanChoice} beats ${computerChoice}`)
-    humanScore++
+    log(`You Win! ${playerChoice} beats ${computerChoice}`)
+    playerScore++
+    logPlayerScore(playerScore)
   } else if (
-    (humanChoice == 'paper' && computerChoice == 'scissor') ||
-    (humanChoice == 'scissor' && computerChoice == 'rock') ||
-    (humanChoice == 'rock' && computerChoice == 'paper')
+    (playerChoice == 'paper' && computerChoice == 'scissor') ||
+    (playerChoice == 'scissor' && computerChoice == 'rock') ||
+    (playerChoice == 'rock' && computerChoice == 'paper')
   ) {
-    console.log(`You Lose! ${humanChoice} beats ${computerChoice}`)
+    log(`You Lose! ${playerChoice} beats ${computerChoice}`)
     computerScore++
+    logComputerScore(computerScore)
   } else {
-    console.log("Tie!")
+    log("Tie!")
   }
 }
 
-function playGame(times) {
-  computerScore = 0;
-  humanScore = 0;
-  for (let i = 0; i < times; i++) {
-    playRound(getHumanChoice(), getComputerChoice())
-  }
-  console.log("Final Score")
-  if (humanScore > computerScore) {
-    console.log(`You Win! Your Score = ${humanScore}, Computer Score = ${computerScore}`)
-  } else if (humanScore < computerScore) {
-    console.log(`You Lose! Your Score = ${humanScore}, Computer Score = ${computerScore}`)
+function printWinner() {
+  log("Final Score")
+  if (playerScore > computerScore) {
+    log(`You Win! Your Score = ${playerScore}, Computer Score = ${computerScore}`)
+  } else if (playerScore < computerScore) {
+    log(`You Lose! Your Score = ${playerScore}, Computer Score = ${computerScore}`)
   } else {
-    console.log("It's A Tie")
+    log("It's A Tie")
   }
+  playerScore = 0
+  computerScore = 0
+  turn = 0
 }
+
+let moves = Array.from(document.querySelector(".moves").children)
+moves.forEach((move) => {
+  move.addEventListener("click", (e) => {
+    console.log(e.currentTarget.id)
+    if (turn >= 5) {
+      printWinner()
+    } else {
+      switch (e.currentTarget.id) {
+        case 'rock':
+          playRound('rock', getComputerChoice())
+          break
+        case 'paper':
+          playRound('paper', getComputerChoice())
+          break
+        case 'scissor':
+          playRound('scissor', getComputerChoice())
+          break
+      }
+    }
+  })
+})
+
+
 
 // playGame(5)
